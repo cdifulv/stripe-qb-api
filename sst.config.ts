@@ -10,11 +10,13 @@ export default $config({
     };
   },
   async run() {
+    const stripeDevSecretKey = new sst.Secret('StripeDevSecretKey');
+    const stripeDevWebhookSecret = new sst.Secret('StripeDevWebhookSecret');
     const api = new sst.aws.ApiGatewayV2('StripeToQuickBooksApi');
-    api.route('GET /', {
-      handler: 'index.handler'
+    api.route('POST /webhook', {
+      handler: 'src/index.handler',
+      link: [stripeDevSecretKey, stripeDevWebhookSecret]
     });
-    api.route('$default', 'index.handler');
 
     return {
       api: api.url

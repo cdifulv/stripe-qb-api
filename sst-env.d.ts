@@ -5,6 +5,14 @@
 
 declare module "sst" {
   export interface Resource {
+    "StripeDevSecretKey": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
+    "StripeDevWebhookSecret": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
     "StripeToQuickBooksApi": {
       "type": "sst.aws.ApiGatewayV2"
       "url": string
